@@ -9,7 +9,7 @@ userRouter.route('/:userId')
     .get((req,res,next) => {
         let userId = req.params.userId;
         req.redis.hget('users',userId, function(err, userList){
-            if(!userList){
+            if (!userList) {
                 res.send('User does not exist');
             } else {
                 res.send(userList);

@@ -10,10 +10,9 @@ roomExistenceRouter.route('/:roomId')
         let roomId = '';
         roomId = req.params.roomId;
         req.redis.sismember('rooms',roomId, (err,reply)=>{
-            if(!reply){
+            if (!reply) {
                 res.send(false);
-            }
-            else{
+            } else {
                 res.send(true);
             }
         });
