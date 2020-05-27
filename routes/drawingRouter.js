@@ -25,19 +25,36 @@ drawingRouter.route('/:room_id')
         let roomId = req.params.room_id;
         let json = req.body.canvas_json;
         let base64 = req.body.base64;
-        if(json != null){
-        req.redis.hmset(roomId, {
-            'canvas_json' : JSON.stringify(req.body.canvas_json),
-            'base64' : base64
-        },(err,reply) => {
-            if(!reply){
-            res.send(err);
+        if(json != null && base64 !=null){
+            if(json != ''){
+                req.redis.hmset(roomId, {
+                    'canvas_json' : JSON.stringify(json),
+                    'base64' : base64
+                },(err,reply) => {
+                    if(!reply){
+                    res.send(err);
+                    }else{
+                    res.send(reply);
+                    }
+                });
             }else{
-            res.send(reply);
+                req.redis.hmset(roomId, {
+                    'canvas_json' : json,
+                    'base64' : base64
+                },(err,reply) => {
+                    if(!reply){
+                    res.send(err);
+                    }else{
+                    res.send(reply);
+                    }
+                });
             }
-        });
         }else{
-        res.send("Send JSON Content");
+            if(json == null){
+                res.send("Send JSON Content");
+            }else{
+                res.send("Send base64");
+            }
         }
     });
 
