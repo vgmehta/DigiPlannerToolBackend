@@ -48,7 +48,27 @@ drawingRouter.route('/:room_id')
             if (json == null) {
                 res.send("Send JSON Content");
             } else {
-                res.send("Send base64");
+                if (json != '') {
+                    req.redis.hmset(roomId, {
+                        'canvas_json' : JSON.stringify(json)
+                    }, (err,reply) => {
+                        if (!reply) {
+                            res.send(err);
+                        } else {
+                            res.send(reply);
+                        }
+                    });
+                } else {
+                    req.redis.hmset(roomId, {
+                        'canvas_json' : json
+                    }, (err,reply) => {
+                        if (!reply) {
+                            res.send(err);
+                        } else {
+                            res.send(reply);
+                        }
+                    });
+                }
             }
         }
     });
