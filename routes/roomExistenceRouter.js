@@ -5,10 +5,10 @@ const roomExistenceRouter = express.Router();
 
 roomExistenceRouter.use(bodyParser.json());
 
-roomExistenceRouter.route('/')
+roomExistenceRouter.route('/:roomId')
     .get( (req,res,next) => {
         let roomId = '';
-        roomId = req.body.room_id;
+        roomId = req.params.roomId;
         req.redis.sismember('rooms',roomId, (err,reply)=>{
             if(!reply){
                 res.send(false);
