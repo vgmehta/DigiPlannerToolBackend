@@ -32,6 +32,10 @@ client.on('connect', function() {
   console.log('connected');
 });
 
+app.get('/', (req,res,next) => {
+  res.sendFile(path.join(__dirname,'../Client/dist/digi-planner/index.html'));
+});
+
 //getUsers
 app.use('/users', userRouter); 
 //View Existing Boards in Admin View, User View
@@ -42,8 +46,3 @@ app.use('/drawing', drawingRouter);
 app.use('/roomIdExists', roomExistenceRouter); 
 //Add room id to the userid's set
 app.use('/addJoinedRoom', addJoinedRoomRouter); 
-
-//Initial connect
-app.get('/', (req,res,next) => {
-  res.sendFile(path.join(__dirname,'../Client/dist/digi-planner/index.html'));
-});
