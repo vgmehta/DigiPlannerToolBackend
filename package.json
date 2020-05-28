@@ -1,23 +1,19 @@
 {
-  "name": "socket",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kits4/socket.git"
-  },
-  "author": "Ketan Khanolkar",
+  "author": "VM",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kits4/socket/issues"
-  },
-  "homepage": "https://github.com/kits4/socket#readme",
   "dependencies": {
+    "async": "^3.2.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "redis": "^3.0.2",
     "socket.io": "^2.3.0"
   }
 }
