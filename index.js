@@ -53,12 +53,28 @@ app.get('/*', (req,res,next) => {
 io.on("connection", socket =>{
     console.log("connection added");
 
+    // socket.on("joinRoom", (roomId) => {
+   //    socket.join(roomId);
+   //  });
+
+   socket.on("canvas", (data) => {
+      socket.broadcast.emit("canvas", data);
+   });
+
+   socket.on("deleteGroup", (data) => {
+      socket.broadcast.emit("deleteGroup", data);
+   });
+
+   socket.on("colorChange", (data) => {
+      socket.broadcast.emit("colorChange", data);
+   });
+
+   socket.on("clearCanvas", (data) => {
+      socket.broadcast.emit("clearCanvas", data);
+   });
+
     socket.on("message", msg => {
         console.log(msg);
-    });
-
-    socket.on("canvasComing", (c) =>{
-        socket.broadcast.emit('canvasComing', c);
     });
     
     socket.on("addedObject", (c) =>{
@@ -69,9 +85,11 @@ io.on("connection", socket =>{
         console.log("Hello");
         socket.broadcast.emit('modifiedObject', c);
     });
+
     socket.on("regrouping", (c) =>{
         socket.broadcast.emit('regrouping', c);
     });
+    
     socket.on("drawingLines", (c) =>{
         socket.broadcast.emit('drawingLines', c);
     });
