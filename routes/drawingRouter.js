@@ -23,5 +23,4 @@ drawingRouter.route('/:room_id')
             res.send('Send image string');
         }
     });
-
 module.exports = drawingRouter;
