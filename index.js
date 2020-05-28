@@ -12,10 +12,10 @@ const roomExistenceRouter = require('./routes/roomExistenceRouter');
 const addJoinedRoomRouter = require('./routes/addJoinedRoomRouter');
 
 const hostname = 'localhost';
-const port = '4200';
+const port = '8080';
 
 const app = express();
-const client = redis.createClient();
+const client = redis.createClient(6379, 'http://redis-digi-planner-route');
 const server = http.createServer(app);
 
 var io = socketio(server);
