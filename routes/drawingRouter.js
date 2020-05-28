@@ -72,5 +72,4 @@ drawingRouter.route('/:room_id')
             }
         }
     });
-
 module.exports = drawingRouter;
