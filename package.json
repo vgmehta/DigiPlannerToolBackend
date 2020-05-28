@@ -4,15 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "VM",
+>>>>>>> 14087888e738a907b3870b86a60075a590fb759c
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "nodemon": "^2.0.4",
+=======
+>>>>>>> 14087888e738a907b3870b86a60075a590fb759c
     "redis": "^3.0.2",
     "socket.io": "^2.3.0"
   }
