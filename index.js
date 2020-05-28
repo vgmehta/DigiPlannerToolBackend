@@ -7,6 +7,7 @@ const path = require('path');
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const drawingRouter = require('./routes/drawingRouter');
+const drawingUserViewRouter = require('./routes/drawingUserViewRouter');
 const roomExistenceRouter = require('./routes/roomExistenceRouter');
 const addJoinedRoomRouter = require('./routes/addJoinedRoomRouter');
 
@@ -36,8 +37,10 @@ client.on('connect', function() {
 app.use('/users', userRouter); 
 //View Existing Boards in Admin View, User View
 app.use('/boards', boardRouter); 
-//Edit Drawing Board User and Admin
-app.use('/drawing', drawingRouter); 
+//Edit Drawing Board Admin
+app.use('/drawing', drawingRouter);
+//Edit and get Room Data(Json)
+app.use('/drawingUserView', drawingUserViewRouter);
 //Check if room code is valid
 app.use('/roomIdExists', roomExistenceRouter); 
 //Add room id to the userid's set
