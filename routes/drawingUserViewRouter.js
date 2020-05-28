@@ -8,7 +8,7 @@ drawingUserViewRouter.use(bodyParser.json());
 drawingUserViewRouter.route('/:room_id')
     .get((req,res,next) => {
         let roomId = req.params.room_id;
-        req.redis.hgetall(roomId, (err,roomData) => {
+        req.redis.hgetall(roomId, (err , roomData) => {
         if (!roomData) {
             res.send(err);
         } else {
