@@ -7,11 +7,11 @@ const boardRouter = express.Router();
 boardRouter.use(bodyParser.json());
 
 boardRouter.route('/:userId')
-    .get((req,res,next) => {
+    .get((req, res, next) => {
         let userId = req.params.userId;
         let rooms = [];
         let roomsinfo = {};
-        req.redis.smembers(userId , function(err, roomsOfUser){
+        req.redis.smembers(userId, function(err, roomsOfUser){
             if (!roomsOfUser) {
                 res.send(err);
             } else {
@@ -32,7 +32,7 @@ boardRouter.route('/:userId')
             };
         }); 
     })
-    .post((req,res,next) => {
+    .post((req, res, next) => {
         let userId = req.params.userId;
         let roomId = req.body.room_id;
         let roomTitle = req.body.room_title;
@@ -50,7 +50,7 @@ boardRouter.route('/:userId')
                         'admin_id' : userId,
                         'canvas_json': '',
                         'base64': ''
-                    }, (err,reply) => {
+                    }, (err, reply) => {
                         if (!reply) {
                             res.send(err);
                         } else {

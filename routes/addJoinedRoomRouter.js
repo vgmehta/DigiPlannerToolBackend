@@ -6,7 +6,7 @@ const addJoinedRoomRouter = express.Router();
 addJoinedRoomRouter.use(bodyParser.json());
 
 addJoinedRoomRouter.route('/:userId')
-    .post((req,res,next) => {
+    .post((req, res, next) => {
         let roomId = '';
         let userId = '';
         roomId = req.body.room_id;

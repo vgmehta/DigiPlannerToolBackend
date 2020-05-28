@@ -16,14 +16,14 @@ drawingUserViewRouter.route('/:room_id')
         }
         });
     })
-    .put((req,res,next) => {
+    .put((req, res, next) => {
         let roomId = req.params.room_id;
         let json = req.body.canvas_json;
         if (json != null) {
             if (json != '') {
                 req.redis.hmset(roomId, {
                     'canvas_json' : JSON.stringify(json)
-                }, (err,reply) => {
+                }, (err, reply) => {
                     if (!reply) {
                         res.send(err);
                     } else {
@@ -33,7 +33,7 @@ drawingUserViewRouter.route('/:room_id')
             } else {
                 req.redis.hmset(roomId, {
                     'canvas_json' : json
-                }, (err,reply) => {
+                }, (err, reply) => {
                     if (!reply) {
                         res.send(err);
                     } else {
