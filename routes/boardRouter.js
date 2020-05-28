@@ -62,13 +62,7 @@ boardRouter.route('/:userId')
             }
         });
         } else {
-            if (roomId == null && roomTitle == null){
-                res.send("Send proper details");
-            } else if (roomId == null) {
-                res.send("Send roomId");
-            } else {
-                res.send("Send roomTitle");
-            }
+            (roomId == null ? (roomTitle == null ? res.send('Send proper details') : res.send('Send room ID')) : res.send('Send room title'));
         }
     });
 
