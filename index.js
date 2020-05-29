@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("colorChange", (data) => {
-     socket.broadcast.to(data[2]).emit("colorChange", data.slice(0, 2));
+     socket.broadcast.to(data[2]).emit("colorChange", data.splice(0, 2));
   });
 
   socket.on("clearCanvas", (data) => {
@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("addedObject", (data) => {
-     socket.broadcast.to(data[2]).emit("addedObject", data.slice(0, 2));
+     socket.broadcast.to(data[2]).emit("addedObject", data.splice(0, 2));
   });
 
   socket.on("modifiedObject", (data) => {
@@ -93,6 +93,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("drawingLines", (data) => {
-     socket.broadcast.to(data[2]).emit("drawingLines", data.slice(0, 2));
+     socket.broadcast.to(data[2]).emit("drawingLines", data.splice(0, 2));
   });
 });
