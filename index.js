@@ -53,47 +53,46 @@ app.get('/*', (req,res,next) => {
 });
 
 //Socket Part Added
-io.on("connection", socket =>{
-    console.log("connection added");
-    //TODO
-    // socket.on("joinRoom", (roomId) => {
-   //    socket.join(roomId);
-   //  });
+io.on("connection", (socket) => {
+  console.log("connection added");
 
-   socket.on("canvas", (data) => {
-      socket.broadcast.emit("canvas", data);
-   });
+  socket.on("joinRoom", (roomId) => {
+     socket.join(roomId);
+  });
 
-   socket.on("deleteGroup", (data) => {
-      socket.broadcast.emit("deleteGroup", data);
-   });
+  socket.on("canvas", (data) => {
+     socket.broadcast.to(data[1]).emit("canvas", data[0]);
+  });
 
-   socket.on("colorChange", (data) => {
-      socket.broadcast.emit("colorChange", data);
-   });
+  socket.on("deleteGroup", (data) => {
+     socket.broadcast.to(data[1]).emit("deleteGroup", data[0]);
+  });
 
-   socket.on("clearCanvas", (data) => {
-      socket.broadcast.emit("clearCanvas", data);
-   });
+  socket.on("colorChange", (data) => {
+     socket.broadcast.to(data[2]).emit("colorChange", data.splice(0, 2));
+  });
 
-    socket.on("message", msg => {
-        console.log(msg);
-    });
-    
-    socket.on("addedObject", (c) =>{
-        socket.broadcast.emit('addedObject', c);
-    });
+  socket.on("clearCanvas", (data) => {
+     socket.broadcast.to(data[1]).emit("clearCanvas", data[0]);
+  });
 
-    socket.on("modifiedObject", (c) =>{
-        console.log("Hello");
-        socket.broadcast.emit('modifiedObject', c);
-    });
+  socket.on("message", (msg) => {
+     console.log(msg);
+  });
 
-    socket.on("regrouping", (c) =>{
-        socket.broadcast.emit('regrouping', c);
-    });
-    
-    socket.on("drawingLines", (c) =>{
-        socket.broadcast.emit('drawingLines', c);
-    });
+  socket.on("addedObject", (data) => {
+     socket.broadcast.to(data[2]).emit("addedObject", data.splice(0, 2));
+  });
+
+  socket.on("modifiedObject", (data) => {
+     socket.broadcast.to(data[1]).emit("modifiedObject", data[0]);
+  });
+
+  socket.on("regrouping", (data) => {
+     socket.broadcast.to(data[1]).emit("regrouping", data[0]);
+  });
+
+  socket.on("drawingLines", (data) => {
+     socket.broadcast.to(data[2]).emit("drawingLines", data.splice(0, 2));
+  });
 });
