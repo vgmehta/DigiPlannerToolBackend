@@ -49,7 +49,8 @@ boardRouter.route('/:userId')
                         'room_title' : roomTitle,
                         'admin_id' : userId,
                         'canvas_json': '',
-                        'base64': ''
+                        'base64': '',
+                        'is_published' : 'false'
                     }, (err, reply) => {
                         if (!reply) {
                             res.send(err);

@@ -13,7 +13,17 @@ roomExistenceRouter.route('/:roomId')
             if (!reply) {
                 res.send(false);
             } else {
-                res.send(true);
+                req.redis.hget(roomId, 'is_published', (err, reply) => {
+                    if(!reply) {
+                        res.send(err);
+                    } else {
+                        if( reply == 'true' ) {
+                            res.send(true);
+                        }else{
+                            res.send('You cannot access this room yet');
+                        }
+                    }
+                });
             }
         });
     });
