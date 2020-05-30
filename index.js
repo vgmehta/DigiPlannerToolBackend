@@ -60,9 +60,9 @@ io.on("connection", (socket) => {
      socket.join(roomId);
   });
 
-  socket.on("canvas", (data) => {
-     socket.broadcast.to(data[1]).emit("canvas", data[0]);
-  });
+  socket.on("groupAltered", (data) => {
+   socket.broadcast.to(data[1]).emit("groupAltered", data[0]);
+});
 
   socket.on("deleteGroup", (data) => {
      socket.broadcast.to(data[1]).emit("deleteGroup", data[0]);
