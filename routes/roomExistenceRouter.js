@@ -6,22 +6,18 @@ const roomExistenceRouter = express.Router();
 roomExistenceRouter.use(bodyParser.json());
 
 roomExistenceRouter.route('/:roomId')
-    .get( (req, res, next) => {
+    .get((req, res, next) => {
         let roomId = '';
         roomId = req.params.roomId;
-        req.redis.sismember('rooms', roomId, (err, reply)=>{
+        req.redis.sismember('rooms', roomId, (err, reply) => {
             if (!reply) {
                 res.send(false);
             } else {
                 req.redis.hget(roomId, 'is_published', (err, reply) => {
-                    if(!reply) {
+                    if (!reply) {
                         res.send(err);
                     } else {
-                        if( reply == 'true' ) {
-                            res.send(true);
-                        }else{
-                            res.send('You cannot access this room yet');
-                        }
+                        (reply === 'true') ? (res.send(true)) : (res.send('You cannot access this room yet'));
                     }
                 });
             }

@@ -8,37 +8,25 @@ drawingUserViewRouter.use(bodyParser.json());
 drawingUserViewRouter.route('/:room_id')
     .get((req, res, next) => {
         let roomId = req.params.room_id;
-        req.redis.hgetall(roomId, (err , roomData) => {
-        if (!roomData) {
-            res.send(err);
-        } else {
-            res.send(roomData);
-        }
+        req.redis.hgetall(roomId, (err, roomData) => {
+            (!roomData) ? (res.send(err)) : (res.send(roomData));
         });
     })
     .put((req, res, next) => {
         let roomId = req.params.room_id;
         let json = req.body.canvas_json;
-        if (json != null) {
+        if (json != undefined) {
             if (json != '') {
                 req.redis.hmset(roomId, {
-                    'canvas_json' : JSON.stringify(json)
+                    'canvas_json': JSON.stringify(json)
                 }, (err, reply) => {
-                    if (!reply) {
-                        res.send(err);
-                    } else {
-                        res.send(reply);
-                    }
+                    (!reply) ? (res.send(err)) : (res.send(reply));
                 });
             } else {
                 req.redis.hmset(roomId, {
-                    'canvas_json' : json
+                    'canvas_json': json
                 }, (err, reply) => {
-                    if (!reply) {
-                        res.send(err);
-                    } else {
-                        res.send(reply);
-                    }
+                    (!reply) ? (res.send(err)) : (res.send(reply));
                 });
             }
         } else {

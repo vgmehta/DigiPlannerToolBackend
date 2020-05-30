@@ -11,15 +11,11 @@ addJoinedRoomRouter.route('/:userId')
         let userId = '';
         roomId = req.body.room_id;
         userId = req.params.userId;
-        if ( roomId != null ) {
+        if (roomId != null) {
             req.redis.sismember(userId, roomId, (err, reply) => {
                 if (!reply) {
                     req.redis.sadd(userId, roomId, (err, reply) => {
-                        if (!reply) {
-                            res.send('0');
-                        } else {
-                            res.send(reply.toString());
-                        }
+                        (!reply) ? (res.send('0')) : (res.send(reply.toString()));
                     });
                 } else {
                     res.send(reply.toString());
