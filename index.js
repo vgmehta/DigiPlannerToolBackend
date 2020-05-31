@@ -12,10 +12,10 @@ const roomExistenceRouter = require('./routes/roomExistenceRouter');
 const addJoinedRoomRouter = require('./routes/addJoinedRoomRouter');
 
 const hostname = 'localhost';
-const port = '4200';
+const port = '8080';
 
 const app = express();
-const client = redis.createClient();
+const client = redis.createClient(6379, 'http://redis-digi-planner--route');
 const server = http.createServer(app);
 
 var io = socketio(server);
@@ -60,9 +60,9 @@ io.on("connection", (socket) => {
      socket.join(roomId);
   });
 
-  socket.on("groupAltered", (data) => {
-   socket.broadcast.to(data[1]).emit("groupAltered", data[0]);
-});
+   socket.on("groupAltered", (data) => {
+      socket.broadcast.to(data[1]).emit("groupAltered", data[0]);
+   });
 
   socket.on("deleteGroup", (data) => {
      socket.broadcast.to(data[1]).emit("deleteGroup", data[0]);
@@ -85,26 +85,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("modifiedObject", (data) => {
-     socket.broadcast.to(data[1]).emit("modifiedObject", data[0]);
+     socket.broadcast.to(data[2]).emit("modifiedObject", data.splice(0, 2));
   });
 
   socket.on("regrouping", (data) => {
-     socket.broadcast.to(data[1]).emit("regrouping", data[0]);
+     socket.broadcast.to(data[2]).emit("regrouping", data.splice(0, 2));
   });
 
   socket.on("drawingLines", (data) => {
      socket.broadcast.to(data[2]).emit("drawingLines", data.splice(0, 2));
   });
-});
-
-client.hmset("users", {
-   'khanolkarketan@gmail.com':'1',
-   'dilipkhanolkar1966@gmai.com':'0',
-   "kits41999@gmail.com":'0'
-},(err, reply) => {
-   if(!reply){
-      console.log('0');
-   }else{
-      console.log(reply.toString());
-   }
 });
