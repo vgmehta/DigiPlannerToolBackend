@@ -15,7 +15,7 @@ const hostname = 'localhost';
 const port = '8080';
 
 const app = express();
-const client = redis.createClient(6379, 'http://redis-digi-planner--route');
+const client = redis.createClient(6379, 'http://redis-digi-planner-route');
 const server = http.createServer(app);
 
 var io = socketio(server);
