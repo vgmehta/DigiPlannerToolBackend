@@ -7,6 +7,7 @@ const userRouter = express.Router();
 userRouter.use(bodyParser.json({
     limit: '50mb'
 }));
+
 userRouter.use(bodyParser.urlencoded({
     limit: '50mb',
     extended: true
