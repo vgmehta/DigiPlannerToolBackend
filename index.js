@@ -13,11 +13,13 @@ const hostname = 'localhost';
 const port = 8080;
 
 const app = express();
-const host = "redis-digiplanner-digi-planner-tool.apps.123.252.203.195.nip.io";
+// const client = redis.createClient(6379, 'http://redis-digi-planner-route');
+//const host = "test-redis-trying-again.apps.123.252.203.195.nip.io";
+const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
-const pw1 = "ICxXmqVPg3bTjYRT";
-var client = redis.createClient(portRedis, host);
-client.auth(pw1);
+const password = "digiplanner";
+var client = redis.createClient(portRedis, '172.30.25.223');
+client.auth(password);
 const server = http.createServer(app);
 
 var io = socketio(server);
@@ -58,6 +60,28 @@ app.use('/room', roomRouter);
 
 app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../Client/dist/digi-planner/index.html'));
+  client.hmset("users", {
+    'vruddhigmehta@gmail.com': '1',
+    'seno.29.11.gupta@gmail.com': '0',
+    'vgmehta@ce.vjti.ac.in': '0',
+    'kiranambokar6@gmail.com': '1',
+    'kdambokar_b17@it.vjti.ac.in': '0',
+    'bhaleraoshubham99@gmail.com': '1',
+    'khanolkarketan@gmail.com': '1',
+    'asrarul97@gmail.com': '1',
+    'dikshagupta2012@gmail.com': '1',
+    'helloworldmanit@gmail.com': '0',
+    'vedantmathe@gmail.com': '1',
+    'sdbhalerao_b17@ce.vjti.ac.in': '0',
+    'mathevedant@gmail.com': '0',
+    'kits41999@gmail.com': '0'
+  }, (err, reply) => {
+    if (!reply) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
 });
 
 //Socket Part Added
