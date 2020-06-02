@@ -65,9 +65,9 @@ io.on("connection", (socket) => {
      socket.join(roomId);
   });
 
-  socket.on("groupAltered", (data) => {
-   socket.broadcast.to(data[1]).emit("groupAltered", data[0]);
-});
+   socket.on("groupAltered", (data) => {
+      socket.broadcast.to(data[1]).emit("groupAltered", data[0]);
+   });
 
   socket.on("deleteGroup", (data) => {
      socket.broadcast.to(data[1]).emit("deleteGroup", data[0]);
@@ -90,11 +90,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("modifiedObject", (data) => {
-     socket.broadcast.to(data[1]).emit("modifiedObject", data[0]);
+     socket.broadcast.to(data[2]).emit("modifiedObject", data.splice(0, 2));
   });
 
   socket.on("regrouping", (data) => {
-     socket.broadcast.to(data[1]).emit("regrouping", data[0]);
+     socket.broadcast.to(data[2]).emit("regrouping", data.splice(0, 2));
   });
 
   socket.on("drawingLines", (data) => {
