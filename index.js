@@ -61,7 +61,7 @@ app.get('/*', (req, res, next) => {
 });
 
 //Socket Part Added
-io.on("connection", socket => {
+io.on("connection", (socket) => {
   console.log("connection added");
 
   socket.on("joinRoom", (roomId) => {
@@ -73,35 +73,34 @@ io.on("connection", socket => {
   });
 
   socket.on("deleteGroup", (data) => {
-    socket.broadcast.emit("deleteGroup", data);
+    socket.broadcast.to(data[1]).emit("deleteGroup", data[0]);
   });
 
   socket.on("colorChange", (data) => {
-    socket.broadcast.emit("colorChange", data);
+    socket.broadcast.to(data[2]).emit("colorChange", data.splice(0, 2));
   });
 
   socket.on("clearCanvas", (data) => {
-    socket.broadcast.emit("clearCanvas", data);
+    socket.broadcast.to(data[1]).emit("clearCanvas", data[0]);
   });
 
-  socket.on("message", msg => {
+  socket.on("message", (msg) => {
     console.log(msg);
   });
 
-  socket.on("addedObject", (c) => {
-    console.log(c[2]);
-    socket.broadcast.emit('addedObject', c);
+  socket.on("addedObject", (data) => {
+    socket.broadcast.to(data[2]).emit("addedObject", data.splice(0, 2));
   });
 
-  socket.on("modifiedObject", (c) => {
-    socket.broadcast.emit('modifiedObject', c);
+  socket.on("modifiedObject", (data) => {
+    socket.broadcast.to(data[2]).emit("modifiedObject", data.splice(0, 2));
   });
 
-  socket.on("regrouping", (c) => {
-    socket.broadcast.emit('regrouping', c);
+  socket.on("regrouping", (data) => {
+    socket.broadcast.to(data[2]).emit("regrouping", data.splice(0, 2));
   });
 
-  socket.on("drawingLines", (c) => {
-    socket.broadcast.emit('drawingLines', c);
+  socket.on("drawingLines", (data) => {
+    socket.broadcast.to(data[2]).emit("drawingLines", data.splice(0, 2));
   });
 });
