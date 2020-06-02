@@ -16,7 +16,8 @@ const port = 8080;
 
 const app = express();
 // const client = redis.createClient(6379, 'http://redis-digi-planner-route');
-const host = "test-redis-trying-again.apps.123.252.203.195.nip.io";
+//const host = "test-redis-trying-again.apps.123.252.203.195.nip.io";
+const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
 const password = "digiplanner";
 var client = redis.createClient(portRedis, host);
