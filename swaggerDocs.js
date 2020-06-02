@@ -7,7 +7,7 @@ const options = {
             version: "1.0.0",
             title: "DigiPlanner APIs",
             description: "DigiPlanner APIs Information",
-            servers: ["http://localhost:8080"],
+            servers: ["http://localhost:4200"],
             license: {
                 name: "Apache 2.0",
                 url: "https://www.apache.org/licenses/LICENSE-2.0.html"

@@ -11,8 +11,8 @@ const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
 const router = express.Router();
 
-const hostname = '0.0.0.0';
-const port = 8080;
+const hostname = 'localhost';
+const port = 4200;
 
 const app = express();
 app.use(cors())
