@@ -60,7 +60,9 @@ app.use('/room', roomRouter);
 
 app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
-  client.hmset("users", {
+});
+
+client.hmset("users", {
     'vruddhigmehta@gmail.com': '1',
     'seno.29.11.gupta@gmail.com': '0',
     'vgmehta@ce.vjti.ac.in': '0',
@@ -82,8 +84,6 @@ app.get('/*', (req, res, next) => {
       console.log(reply);
     }
   });
-});
-
 //Socket Part Added
 io.on("connection", (socket) => {
   console.log("connection added");
