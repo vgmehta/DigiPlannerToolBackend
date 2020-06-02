@@ -14,6 +14,14 @@ const hostname = '0.0.0.0';
 const port = 8080;
 
 const app = express();
+
+app.use('/angular', router, (req,res,next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'X-requested-width')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST')
+});
+
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
 const password = "digiplanner";
@@ -30,13 +38,6 @@ app.use(bodyParser.urlencoded({
   limit: '50mb',
   extended: true
 }));
-
-app.use('/angular', router, (req,res,next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'X-requested-width')
-  res.header('Access-Control-Allow-Headers', 'Content-Type')
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST')
-});
 
 swaggerDoc(app);
 app.use(express.static(path.join(__dirname, './public/dist/digi-planner')));
