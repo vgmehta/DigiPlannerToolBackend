@@ -9,7 +9,7 @@ const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
 
-const hostname = 'localhost';
+const hostname = '0.0.0.0';
 const port = 8080;
 
 const app = express();
