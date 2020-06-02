@@ -13,13 +13,6 @@ userRouter.use(bodyParser.urlencoded({
     extended: true
 }));
 
-userRouter.use((req,res,next) => {
-  req.header('Access-Control-Allow-Origin', '*');
-  req.header('Access-Control-Allow-Headers', 'X-Requested-With');
-  req.header('Access-Control-Allow-Headers', 'Content-Type');
-  req.header('Access-Control-Allow-Methods', 'PUT, GET, POST');
-});
-
 /**
  * @swagger
  * /user/{userId}:
