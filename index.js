@@ -41,6 +41,16 @@ client.on('connect', function() {
   console.log('connected');
 });
 
+client.hmset("users", {
+  'vruddhigmehta@gmail.com': '1'
+}, (err, reply) => {
+  if (!reply) {
+    console.log(err);
+  } else {
+    console.log(reply);
+  }
+});
+
 //getUsers
 app.use('/users', userRouter); 
 //View Existing Boards in Admin View, User View
