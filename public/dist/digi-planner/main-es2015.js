@@ -48,7 +48,7 @@ class AdminBoardService {
             base64: this.base64,
             is_published: 'true'
         };
-        return this.http.put(`http://localhost:8080/board/${userId}/${roomCode}`, post, { responseType: 'json' });
+        return this.http.put(`http://0.0.0.0:8080/board/${userId}/${roomCode}`, post, { responseType: 'json' });
     }
 }
 AdminBoardService.ɵfac = function AdminBoardService_Factory(t) { return new (t || AdminBoardService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
@@ -688,7 +688,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URI", function() { return URI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clientId", function() { return clientId; });
 const PORT = '8080';
-const URI = `http://localhost:${PORT}`;
+const URI = `http://0.0.0.0:${PORT}`;
 //const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
 const clientId = '610664320073-4oui7dgr99meb3n28m5ljp25f65fmf79.apps.googleusercontent.com';
 
@@ -1393,7 +1393,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class SocketService {
     constructor() {
-        this.url = "http://localhost:8080";
+        this.url = "http://0.0.0.0:8080";
     }
     connect() {
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1__(this.url);
@@ -1629,7 +1629,7 @@ class ConstantsService {
         this.HideControls = { tl: true, tr: false, bl: true, br: true, ml: true, mt: true, mr: true, mb: true, mtr: true };
         this.userBackURL = '../../assets/user_back.png';
         this.PORT = '8080';
-        this.URI = `http://localhost:${this.PORT}`;
+        this.URI = `http://0.0.0.0:${this.PORT}`;
         this.starIconURL = '../assets/stars-black-48dp.svg';
         this.colors = ['CornflowerBlue', 'darkcyan', 'MediumAquaMarine', 'lemonchiffon', 'gold', 'silver', 'salmon', 'palevioletred', 'pink'];
         this.connectText = 'Connect';
@@ -2270,7 +2270,7 @@ class UserDatabaseService {
     }
     sendingCanvas(canvasJSON) {
         delete canvasJSON.backgroundImage;
-        this.http.put(`http://localhost:4200/board/${this.constants.userID}/${this.constants.roomID}`, { canvas_json: JSON.stringify(canvasJSON) }, { responseType: 'json' })
+        this.http.put(`http://0.0.0.0:4200/board/${this.constants.userID}/${this.constants.roomID}`, { canvas_json: JSON.stringify(canvasJSON) }, { responseType: 'json' })
             .subscribe(responseData => { });
     }
     getRoomData() {
