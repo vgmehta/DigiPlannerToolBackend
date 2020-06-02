@@ -1310,7 +1310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var PORT = '8080';
     var URI = "http://localhost:".concat(PORT); //const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
 
-    var clientId = '610664320073-8c11uub4p1ojc6agn6sp76jn88bk43ut.apps.googleusercontent.com';
+    var clientId = '610664320073-4oui7dgr99meb3n28m5ljp25f65fmf79.apps.googleusercontent.com';
     /***/
   },
 
