@@ -65,7 +65,7 @@ app.use('/board', boardRouter);
 //Room
 app.use('/room', roomRouter);
 
-app.get('/*', (req, res, next) => {
+app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
 });
 
