@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 swaggerDoc(app);
-app.use(express.static(path.join(__dirname, '../Client/dist/digi-planner')));
+app.use(express.static(path.join(__dirname, './public/dist/digi-planner')));
 app.use((req, res, next) => {
   req.redis = client;
   next();
@@ -59,7 +59,7 @@ app.use('/board', boardRouter);
 app.use('/room', roomRouter);
 
 app.get('/*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../Client/dist/digi-planner/index.html'));
+  res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
   client.hmset("users", {
     'vruddhigmehta@gmail.com': '1',
     'seno.29.11.gupta@gmail.com': '0',
