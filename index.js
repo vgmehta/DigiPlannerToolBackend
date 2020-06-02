@@ -1,27 +1,28 @@
 const express = require('express');
-const cors = require('cors')
+//const cors = require('cors');
 const http = require('http');
 const bodyParser = require('body-parser');
 const redis = require('redis');
 const path = require('path');
 const socketio = require('socket.io');
-const swaggerDoc = require('./swaggerDocs')
+const swaggerDoc = require('./swaggerDocs');
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
-//const router = express.Router();
+const router = express.Router();
 
 const hostname = '0.0.0.0';
 const port = 8080;
 
 const app = express();
-app.use(cors())
-/*app.use('/angular', router, (req,res,next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With')
-  res.header('Access-Control-Allow-Headers', 'Content-Type')
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST')
-});*/
+//app.use(cors())
+app.use('/angular', router, (req,res,next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST');
+  res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
+});
 
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
@@ -66,9 +67,9 @@ app.use('/board', boardRouter);
 //Room
 app.use('/room', roomRouter);
 
-app.get('/*', (req, res, next) => {
+/*app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
-});
+});*/
 
 // client.hmset("users", {
 //     'vruddhigmehta@gmail.com': '1',
