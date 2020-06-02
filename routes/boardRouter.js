@@ -14,6 +14,33 @@ boardRouter.use(bodyParser.urlencoded({
 }));
 
 boardRouter.route('/:userId/:roomId')
+    /**
+     * @swagger
+     * /board/{userId}/{roomId}:
+     *  get:
+     *    description: Used to get board data
+     *    responses:
+     *      '200':
+     *        description: 
+     *              A JSON object with two fields-success(true or false) 
+     *              and messages(room data not available)
+     *              / data (room information)
+     *  parameters:
+     *      - name: userId
+     *        in: path
+     *        description: Email of the user
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: email
+     *      - name: roomId
+     *        in: path
+     *        description: Room code
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: string
+     */
     .get((req, res, next) => {
         var roomId = req.params.roomId;
         var userId = req.params.userId;
@@ -35,6 +62,46 @@ boardRouter.route('/:userId/:roomId')
             }
         });
     })
+    /**
+     * @swagger
+     * /board/{userId}/{roomId}:
+     *  put:
+     *    description: Used to get board data
+     *    responses:
+     *      '201':
+     *        description: 
+     *              A JSON object with two fields-success(true or false) 
+     *              and messages(whether room data is updated or not)
+     *    consumes:
+     *      - application/json
+     *    parameters:
+     *      - name: userId
+     *        in: path
+     *        description: Email of the user
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: email
+     *      - name: roomId
+     *        in: path
+     *        description: Room code
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: string
+     *      - name: board
+     *        description: Board information to be updated
+     *        in: body
+     *        schema:
+     *          type: object
+     *          properties: 
+     *               canvas_json:
+     *                   type: string
+     *               base64:
+     *                   type: string
+     *               is_published:
+     *                   type: string
+     */
     .put((req, res, next) => {
         let userId = req.params.userId;
         let roomId = req.params.roomId;
@@ -129,6 +196,42 @@ boardRouter.route('/:userId/:roomId')
             }
         })
     })
+    /**
+     * @swagger
+     * /board/{userId}/{roomId}:
+     *  post:
+     *    description: Used to create a board
+     *    responses:
+     *      '201':
+     *        description: 
+     *              A JSON object with two fields-success(true or false) 
+     *              and messages(room created or not)
+     *    consumes:
+     *      - application/json
+     *    parameters:
+     *      - name: userId
+     *        in: path
+     *        description: Email of the user
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: email
+     *      - name: roomId
+     *        in: path
+     *        description: Room code
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: string
+     *      - name: board
+     *        description: Board information to be added
+     *        in: body
+     *        schema:
+     *          type: object
+     *          properties: 
+     *               room_title:
+     *                   type: string
+     */
     .post((req, res, next) => {
         let userId = req.params.userId;
         let roomId = req.params.roomId;

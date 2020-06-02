@@ -13,6 +13,24 @@ userRouter.use(bodyParser.urlencoded({
     extended: true
 }));
 
+/**
+ * @swagger
+ * /user/{userId}:
+ *  get:
+ *    description: Used to request user information
+ *    responses:
+ *      '200':
+ *        description: 
+ *              A JSON object with two fields-success(true or false) and data(email,roles,boardlist)
+ *  parameters:
+ *      - name: userId
+ *        in: path
+ *        description: Email of the user
+ *        required: true
+ *        schema:
+ *          type: string
+ *          format: email
+ */
 userRouter.route('/:userId')
     .get((req, res, next) => {
         let userId = req.params.userId;

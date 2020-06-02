@@ -12,6 +12,32 @@ roomRouter.use(bodyParser.urlencoded({
     extended: true
 }));
 
+/**
+ * @swagger
+ * /room/{userId}/{roomId}:
+ *  get:
+ *    description: Used to check room code validity
+ *    responses:
+ *      '200':
+ *        description: 
+ *              A JSON object with two fields-success(true or false) 
+ *              and messages( existence and availability of room code )
+ *  parameters:
+ *      - name: userId
+ *        in: path
+ *        description: Email of the user
+ *        required: true
+ *        schema:
+ *          type: string
+ *          format: email
+ *      - name: roomId
+ *        in: path
+ *        description: Room code
+ *        required: true
+ *        schema:
+ *          type: string
+ *          format: string
+ */
 roomRouter.route('/:userId/:roomId')
     .get((req, res, next) => {
         let roomId = req.params.roomId;
@@ -45,6 +71,32 @@ roomRouter.route('/:userId/:roomId')
             }
         });
     })
+    /**
+     * @swagger
+     * /room/{userId}/{roomId}:
+     *  post:
+     *    description: Used to add room code to user list for view existing board feature
+     *    responses:
+     *      '201':
+     *        description: 
+     *              A JSON object with two fields-success(true or false) 
+     *              and messages( post request successful or not )
+     *  parameters:
+     *      - name: userId
+     *        in: path
+     *        description: Email of the user
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: email
+     *      - name: roomId
+     *        in: path
+     *        description: Room code
+     *        required: true
+     *        schema:
+     *          type: string
+     *          format: string
+     */
     .post((req, res, next) => {
         let roomId = req.params.roomId;
         let userId = req.params.userId;
