@@ -8,13 +8,12 @@ const swaggerDoc = require('./swaggerDocs')
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
+const router = express.Router();
 
 const hostname = '0.0.0.0';
 const port = 8080;
 
 const app = express();
-// const client = redis.createClient(6379, 'http://redis-digi-planner-route');
-//const host = "test-redis-trying-again.apps.123.252.203.195.nip.io";
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
 const password = "digiplanner";
@@ -31,6 +30,13 @@ app.use(bodyParser.urlencoded({
   limit: '50mb',
   extended: true
 }));
+
+app.use('/angular', router, (req,res,next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'X-requested-width')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST')
+});
 
 swaggerDoc(app);
 app.use(express.static(path.join(__dirname, './public/dist/digi-planner')));
@@ -62,28 +68,28 @@ app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
 });
 
-client.hmset("users", {
-    'vruddhigmehta@gmail.com': '1',
-    'seno.29.11.gupta@gmail.com': '0',
-    'vgmehta@ce.vjti.ac.in': '0',
-    'kiranambokar6@gmail.com': '1',
-    'kdambokar_b17@it.vjti.ac.in': '0',
-    'bhaleraoshubham99@gmail.com': '1',
-    'khanolkarketan@gmail.com': '1',
-    'asrarul97@gmail.com': '1',
-    'dikshagupta2012@gmail.com': '1',
-    'helloworldmanit@gmail.com': '0',
-    'vedantmathe@gmail.com': '1',
-    'sdbhalerao_b17@ce.vjti.ac.in': '0',
-    'mathevedant@gmail.com': '0',
-    'kits41999@gmail.com': '0'
-  }, (err, reply) => {
-    if (!reply) {
-      console.log(err);
-    } else {
-      console.log(reply);
-    }
-  });
+// client.hmset("users", {
+//     'vruddhigmehta@gmail.com': '1',
+//     'seno.29.11.gupta@gmail.com': '0',
+//     'vgmehta@ce.vjti.ac.in': '0',
+//     'kiranambokar6@gmail.com': '1',
+//     'kdambokar_b17@it.vjti.ac.in': '0',
+//     'bhaleraoshubham99@gmail.com': '1',
+//     'khanolkarketan@gmail.com': '1',
+//     'asrarul97@gmail.com': '1',
+//     'dikshagupta2012@gmail.com': '1',
+//     'helloworldmanit@gmail.com': '0',
+//     'vedantmathe@gmail.com': '1',
+//     'sdbhalerao_b17@ce.vjti.ac.in': '0',
+//     'mathevedant@gmail.com': '0',
+//     'kits41999@gmail.com': '0'
+//   }, (err, reply) => {
+//     if (!reply) {
+//       console.log(err);
+//     } else {
+//       console.log(reply);
+//     }
+//   });
 //Socket Part Added
 io.on("connection", (socket) => {
   console.log("connection added");
