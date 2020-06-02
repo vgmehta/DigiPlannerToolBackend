@@ -20,7 +20,7 @@ const app = express();
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
 const password = "digiplanner";
-var client = redis.createClient(portRedis, 172.30.25.223);
+var client = redis.createClient(portRedis, '172.30.25.223');
 client.auth(password);
 const server = http.createServer(app);
 
