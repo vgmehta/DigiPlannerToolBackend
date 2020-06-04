@@ -16,11 +16,11 @@ const port = 8080;
 
 const app = express();
 //app.use(cors())
-app.use('/angular', router, (req,res,next) => {
-  req.header('Access-Control-Allow-Origin', '*');
-  req.header('Access-Control-Allow-Headers', 'X-Requested-With');
-  req.header('Access-Control-Allow-Headers', 'Content-Type');
-  req.header('Access-Control-Allow-Methods', 'PUT, GET, POST');
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'X-requested-width,Origin,Content-Type,Accept');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST');
+  next();
 });
 
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
