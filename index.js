@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 swaggerDoc(app);
-app.use(express.static(path.join(__dirname, '../C/dist/digi-planner')));
+app.use(express.static(path.join(__dirname, './public/dist/digi-planner')));
 app.use((req, res, next) => {
   req.redis = client;
   next();
