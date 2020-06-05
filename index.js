@@ -10,8 +10,8 @@ const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
 
-const hostname = 'localhost';
-const port = 4200;
+const hostname = '0.0.0.0';
+const port = 8080;
 
 const app = express();
 //app.use(cors())
@@ -25,9 +25,9 @@ app.use((req, res, next) => {
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
 const password = "digiplanner";
-// var client = redis.createClient(portRedis, '172.30.25.223');
-var client = redis.createClient();
-//client.auth(password);
+var client = redis.createClient(portRedis, '172.30.25.223');
+//var client = redis.createClient();
+client.auth(password);
 const server = http.createServer(app);
 
 var io = socketio(server);
