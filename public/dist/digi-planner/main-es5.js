@@ -1308,7 +1308,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     });
 
     var PORT = '8080';
-    var URI = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io"; //const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
+    var URI = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io"; // const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
 
     var clientId = '610664320073-4oui7dgr99meb3n28m5ljp25f65fmf79.apps.googleusercontent.com';
     /***/
@@ -2928,7 +2928,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             text.fill = '#7f8c8d';
             text.fontStyle = 'italic';
             shape.set('opacity', 0.7);
-            text.set('text', "".concat(data[1].firstName, " is editing"));
+            text.set('text', "".concat(data[1].firstName, " is typing"));
 
             _this14.groupService.unGroup(gr, canvas);
 
@@ -2999,13 +2999,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
 
             var text = gr._objects[1];
-            var shape = gr._objects[0];
+            var shape = gr._objects[0]; // this.groupService.unGroup(gr, canvas);
+            // shape.fill = data[1];
 
-            _this14.groupService.unGroup(gr, canvas);
-
-            shape.fill = data[1];
-
-            _this14.groupService.regroup(shape, text, canvas, renderer);
+            shape.set("fill", data[1]);
+            canvas.renderAll(); // this.groupService.regroup(shape, text, canvas, renderer);
           });
           this.socketService.socket.on('deleteGroup', function (data) {
             var gr;
@@ -3359,7 +3357,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var groupCoord = g.getPointByOrigin(0, 0);
           canvas.remove(shape);
           canvas.remove(text);
-          this.createGroup(shape, text, canvas, groupCoord.x, groupCoord.y, g.connections, renderer, g.id, false, g.angle, g.scaleX, g.scaleY);
+          this.createGroup(shape, text, canvas, groupCoord.x, groupCoord.y, g.connections, renderer, g.id, false, g.angle, 1, 1);
           this.selectedGroup.splice(u, 1);
           this.userDatabase.sendingCanvas(canvas.toJSON(['id', 'connections', 'givingId', 'editing']));
         }
@@ -3924,28 +3922,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (group) {
             var shape = group._objects[0];
             var text = group._objects[1];
-            this.socketService.colorChange(group.id, color, this.constants.roomID);
-            this.groupService.unGroup(group, canvas);
-            shape.fill = color;
-            this.groupService.regroup(shape, text, canvas, renderer);
+            this.socketService.colorChange(group.id, color, this.constants.roomID); // this.groupService.unGroup(group, canvas);
+            // shape.fill = color;
 
-            var _iterator11 = _createForOfIteratorHelper(canvas._objects),
-                _step11;
-
-            try {
-              for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-                var obj = _step11.value;
-
-                if (obj.id === text.id) {
-                  canvas.setActiveObject(obj);
-                  break;
-                }
-              }
-            } catch (err) {
-              _iterator11.e(err);
-            } finally {
-              _iterator11.f();
-            }
+            shape.set("fill", color);
+            canvas.renderAll(); // this.groupService.regroup(shape, text, canvas, renderer);
+            // for (const obj of canvas._objects) {
+            //   if (obj.id === text.id) {
+            //     canvas.setActiveObject(obj);
+            //     break;
+            //   }
+            // }
           }
         }
       }, {
@@ -3976,12 +3963,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           canvas.givingId = newCanvas.givingId;
           var groupArray = [];
 
-          var _iterator12 = _createForOfIteratorHelper(newCanvas._objects),
-              _step12;
+          var _iterator11 = _createForOfIteratorHelper(newCanvas._objects),
+              _step11;
 
           try {
-            for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-              var _object = _step12.value;
+            for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+              var _object = _step11.value;
 
               if (_object.type === 'group') {
                 var _shape = _object._objects[0];
@@ -3994,29 +3981,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _iterator12.e(err);
+            _iterator11.e(err);
           } finally {
-            _iterator12.f();
+            _iterator11.f();
           }
 
           for (var _i = 0, _groupArray = groupArray; _i < _groupArray.length; _i++) {
             var group = _groupArray[_i];
 
-            var _iterator13 = _createForOfIteratorHelper(newCanvas._objects),
-                _step13;
+            var _iterator12 = _createForOfIteratorHelper(newCanvas._objects),
+                _step12;
 
             try {
-              for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-                var object = _step13.value;
+              for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                var object = _step12.value;
 
                 if (object.id === group.id) {
                   this.drawLinesWhileLoading(canvas, object, group);
                 }
               }
             } catch (err) {
-              _iterator13.e(err);
+              _iterator12.e(err);
             } finally {
-              _iterator13.f();
+              _iterator12.f();
             }
           }
 
@@ -4049,19 +4036,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           canvas.remove(group);
 
-          var _iterator14 = _createForOfIteratorHelper(items),
-              _step14;
+          var _iterator13 = _createForOfIteratorHelper(items),
+              _step13;
 
           try {
-            for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-              var item = _step14.value;
+            for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+              var item = _step13.value;
               item.selectable = false;
               canvas.add(item);
             }
           } catch (err) {
-            _iterator14.e(err);
+            _iterator13.e(err);
           } finally {
-            _iterator14.f();
+            _iterator13.f();
           }
         }
       }, {
@@ -4069,20 +4056,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function drawLinesWhileLoading(canvas, object, group) {
           canvas.selectedElements.push(group);
 
-          var _iterator15 = _createForOfIteratorHelper(object.connections),
-              _step15;
+          var _iterator14 = _createForOfIteratorHelper(object.connections),
+              _step14;
 
           try {
-            for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-              var connection = _step15.value;
+            for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+              var connection = _step14.value;
 
               if (connection.name === 'p1') {
-                var _iterator16 = _createForOfIteratorHelper(canvas._objects),
-                    _step16;
+                var _iterator15 = _createForOfIteratorHelper(canvas._objects),
+                    _step15;
 
                 try {
-                  for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-                    var connectedGroup = _step16.value;
+                  for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                    var connectedGroup = _step15.value;
 
                     if (connectedGroup.id === connection.connectedGroup) {
                       canvas.selectedElements.push(connectedGroup);
@@ -4092,16 +4079,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     }
                   }
                 } catch (err) {
-                  _iterator16.e(err);
+                  _iterator15.e(err);
                 } finally {
-                  _iterator16.f();
+                  _iterator15.f();
                 }
               }
             }
           } catch (err) {
-            _iterator15.e(err);
+            _iterator14.e(err);
           } finally {
-            _iterator15.f();
+            _iterator14.f();
           }
 
           canvas.selectedElements.pop();
@@ -4224,7 +4211,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "sendingCanvas",
         value: function sendingCanvas(canvasJSON) {
           delete canvasJSON.backgroundImage;
-          this.http.put("http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io/board/".concat(this.constants.userID, "/").concat(this.constants.roomID), {
+          this.http.put("http://localhost:4200/board/".concat(this.constants.userID, "/").concat(this.constants.roomID), {
             canvas_json: JSON.stringify(canvasJSON)
           }, {
             responseType: 'json'
@@ -5175,7 +5162,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\My Files\Programs\DB\digi-planner new\DigiPlannerTool\client\src\main.ts */
+    /*! C:\Users\Administrator\Desktop\DigiPlan\C\src\main.ts */
     "./src/main.ts");
     /***/
   },

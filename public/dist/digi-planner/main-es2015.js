@@ -689,7 +689,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clientId", function() { return clientId; });
 const PORT = '8080';
 const URI = `http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io`;
-//const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
+// const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
 const clientId = '610664320073-4oui7dgr99meb3n28m5ljp25f65fmf79.apps.googleusercontent.com';
 
 
@@ -1393,7 +1393,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class SocketService {
     constructor() {
-        this.url = `http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io`;
+        this.url = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io";
     }
     connect() {
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1__(this.url);
@@ -1528,7 +1528,7 @@ class UserSocketService {
             text.fill = '#7f8c8d';
             text.fontStyle = 'italic';
             shape.set('opacity', 0.7);
-            text.set('text', `${data[1].firstName} is editing`);
+            text.set('text', `${data[1].firstName} is typing`);
             this.groupService.unGroup(gr, canvas);
             text.lockMovementX = false;
             text.lockMovementY = false;
@@ -1567,9 +1567,11 @@ class UserSocketService {
             }
             const text = gr._objects[1];
             const shape = gr._objects[0];
-            this.groupService.unGroup(gr, canvas);
-            shape.fill = data[1];
-            this.groupService.regroup(shape, text, canvas, renderer);
+            // this.groupService.unGroup(gr, canvas);
+            // shape.fill = data[1];
+            shape.set("fill", data[1]);
+            canvas.renderAll();
+            // this.groupService.regroup(shape, text, canvas, renderer);
         });
         this.socketService.socket.on('deleteGroup', (data) => {
             let gr;
@@ -1758,7 +1760,7 @@ class GroupService {
         const groupCoord = g.getPointByOrigin(0, 0);
         canvas.remove(shape);
         canvas.remove(text);
-        this.createGroup(shape, text, canvas, groupCoord.x, groupCoord.y, g.connections, renderer, g.id, false, g.angle, g.scaleX, g.scaleY);
+        this.createGroup(shape, text, canvas, groupCoord.x, groupCoord.y, g.connections, renderer, g.id, false, g.angle, 1, 1);
         this.selectedGroup.splice(u, 1);
         this.userDatabase.sendingCanvas(canvas.toJSON(['id', 'connections', 'givingId', 'editing']));
     }
@@ -2127,15 +2129,17 @@ class ShapeService {
             const shape = group._objects[0];
             const text = group._objects[1];
             this.socketService.colorChange(group.id, color, this.constants.roomID);
-            this.groupService.unGroup(group, canvas);
-            shape.fill = color;
-            this.groupService.regroup(shape, text, canvas, renderer);
-            for (const obj of canvas._objects) {
-                if (obj.id === text.id) {
-                    canvas.setActiveObject(obj);
-                    break;
-                }
-            }
+            // this.groupService.unGroup(group, canvas);
+            // shape.fill = color;
+            shape.set("fill", color);
+            canvas.renderAll();
+            // this.groupService.regroup(shape, text, canvas, renderer);
+            // for (const obj of canvas._objects) {
+            //   if (obj.id === text.id) {
+            //     canvas.setActiveObject(obj);
+            //     break;
+            //   }
+            // }
         }
     }
     getTitleFromDatabase(canvas, renderer) {
@@ -2270,7 +2274,7 @@ class UserDatabaseService {
     }
     sendingCanvas(canvasJSON) {
         delete canvasJSON.backgroundImage;
-        this.http.put(`http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io/board/${this.constants.userID}/${this.constants.roomID}`, { canvas_json: JSON.stringify(canvasJSON) }, { responseType: 'json' })
+        this.http.put(`http://localhost:4200/board/${this.constants.userID}/${this.constants.roomID}`, { canvas_json: JSON.stringify(canvasJSON) }, { responseType: 'json' })
             .subscribe(responseData => { });
     }
     getRoomData() {
@@ -2738,7 +2742,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\My Files\Programs\DB\digi-planner new\DigiPlannerTool\client\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Administrator\Desktop\DigiPlan\C\src\main.ts */"./src/main.ts");
 
 
 /***/ }),

@@ -66,32 +66,32 @@ app.use('/board', boardRouter);
 //Room
 app.use('/room', roomRouter);
 
-router.get('/*', (req, res, next) => {
+app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
 });
 
 client.hmset("users", {
-  'vruddhigmehta@gmail.com': '1',
-  'seno.29.11.gupta@gmail.com': '0',
-  'vgmehta_b17@ce.vjti.ac.in': '0',
-  'kiranambokar6@gmail.com': '1',
-  'kdambokar_b17@it.vjti.ac.in': '0',
-  'bhaleraoshubham99@gmail.com': '1',
-  'khanolkarketan@gmail.com': '1',
-  'asrarul97@gmail.com': '1',
-  'dikshagupta2012@gmail.com': '1',
-  'helloworldmanit@gmail.com': '0',
-  'vedantmathe@gmail.com': '1',
-  'sdbhalerao_b17@ce.vjti.ac.in': '0',
-  'mathevedant@gmail.com': '0',
-  'kits41999@gmail.com': '0'
-}, (err, reply) => {
-  if (!reply) {
-    console.log(err);
-  } else {
-    console.log(reply);
-  }
-});
+    'vruddhigmehta@gmail.com': '1',
+    'seno.29.11.gupta@gmail.com': '0',
+    'vgmehta@ce.vjti.ac.in': '0',
+    'kiranambokar6@gmail.com': '1',
+    'kdambokar_b17@it.vjti.ac.in': '0',
+    'bhaleraoshubham99@gmail.com': '1',
+    'khanolkarketan@gmail.com': '1',
+    'asrarul97@gmail.com': '1',
+    'dikshagupta2012@gmail.com': '1',
+    'helloworldmanit@gmail.com': '0',
+    'vedantmathe@gmail.com': '1',
+    'sdbhalerao_b17@ce.vjti.ac.in': '0',
+    'mathevedant@gmail.com': '0',
+    'kits41999@gmail.com': '0'
+  }, (err, reply) => {
+    if (!reply) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
 //Socket Part Added
 io.on("connection", (socket) => {
   console.log("connection added");
