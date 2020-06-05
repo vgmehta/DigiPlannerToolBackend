@@ -1,27 +1,26 @@
 const express = require('express');
-const cors = require('cors')
+//const cors = require('cors');
 const http = require('http');
 const bodyParser = require('body-parser');
 const redis = require('redis');
 const path = require('path');
 const socketio = require('socket.io');
-const swaggerDoc = require('./swaggerDocs')
+const swaggerDoc = require('./swaggerDocs');
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
-const router = express.Router();
 
 const hostname = 'localhost';
 const port = 4200;
 
 const app = express();
-app.use(cors())
-/*app.use('/angular', router, (req,res,next) => {
+//app.use(cors())
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'X-requested-width')
-  res.header('Access-Control-Allow-Headers', 'Content-Type')
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST')
-});*/
+  res.header('Access-Control-Allow-Headers', 'X-requested-width,Origin,Content-Type,Accept');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST');
+  next();
+});
 
 const host = "redis-digi-planner-tool.apps.123.252.203.195.nip.io";
 const portRedis = 6379;
@@ -67,8 +66,8 @@ app.use('/board', boardRouter);
 //Room
 app.use('/room', roomRouter);
 
-app.get('/*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../C/dist/digi-planner/index.html'));
+router.get('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
 });
 
 client.hmset("users", {

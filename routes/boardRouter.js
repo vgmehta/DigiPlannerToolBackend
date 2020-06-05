@@ -68,7 +68,7 @@ boardRouter.route('/:userId/:roomId')
      *  put:
      *    description: Used to get board data
      *    responses:
-     *      '201':
+     *      '200':
      *        description: 
      *              A JSON object with two fields-success(true or false) 
      *              and messages(whether room data is updated or not)
@@ -202,7 +202,7 @@ boardRouter.route('/:userId/:roomId')
      *  post:
      *    description: Used to create a board
      *    responses:
-     *      '201':
+     *      '200':
      *        description: 
      *              A JSON object with two fields-success(true or false) 
      *              and messages(room created or not)
