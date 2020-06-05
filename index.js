@@ -10,7 +10,7 @@ const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
 
-const hostname = 'http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io';
+const hostname = '0.0.0.0';
 const port = 8080;
 
 const app = express();
@@ -65,7 +65,7 @@ app.use('/board', boardRouter);
 //Room
 app.use('/room', roomRouter);
 
-router.get('/*', (req, res, next) => {
+app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, './public/dist/digi-planner/index.html'));
 });
 
