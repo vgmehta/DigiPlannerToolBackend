@@ -88,7 +88,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             base64: this.base64,
             is_published: 'true'
           };
-          return this.http.put("http://localhost:8080/board/".concat(userId, "/").concat(roomCode), post, {
+          return this.http.put("http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io/board/".concat(userId, "/").concat(roomCode), post, {
             responseType: 'json'
           });
         }
@@ -1308,7 +1308,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     });
 
     var PORT = '8080';
-    var URI = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io:".concat(PORT); //const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
+    var URI = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io"; //const clientId:string='610664320073-4ik734pbbflijv056jr130n5k6e7ia8q.apps.googleusercontent.com';
 
     var clientId = '610664320073-4oui7dgr99meb3n28m5ljp25f65fmf79.apps.googleusercontent.com';
     /***/
@@ -2686,7 +2686,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function SocketService() {
         _classCallCheck(this, SocketService);
 
-        this.url = "http://localhost:8080";
+        this.url = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io";
       }
 
       _createClass(SocketService, [{
@@ -3140,7 +3140,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       };
       this.userBackURL = '../../assets/user_back.png';
       this.PORT = '8080';
-      this.URI = "http://localhost:".concat(this.PORT);
+      this.URI = "http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io";
       this.starIconURL = '../assets/stars-black-48dp.svg';
       this.colors = ['CornflowerBlue', 'darkcyan', 'MediumAquaMarine', 'lemonchiffon', 'gold', 'silver', 'salmon', 'palevioletred', 'pink'];
       this.connectText = 'Connect';
@@ -4224,7 +4224,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "sendingCanvas",
         value: function sendingCanvas(canvasJSON) {
           delete canvasJSON.backgroundImage;
-          this.http.put("http://localhost:4200/board/".concat(this.constants.userID, "/").concat(this.constants.roomID), {
+          this.http.put("http://digi-planner-tool-digi-planner-tool.apps.123.252.203.195.nip.io/board/".concat(this.constants.userID, "/").concat(this.constants.roomID), {
             canvas_json: JSON.stringify(canvasJSON)
           }, {
             responseType: 'json'
