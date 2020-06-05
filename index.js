@@ -9,7 +9,6 @@ const swaggerDoc = require('./swaggerDocs');
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const roomRouter = require('./routes/roomRouter');
-const router = express.Router();
 
 const hostname = '0.0.0.0';
 const port = 8080;
