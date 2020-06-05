@@ -77,7 +77,7 @@ roomRouter.route('/:userId/:roomId')
      *  post:
      *    description: Used to add room code to user list for view existing board feature
      *    responses:
-     *      '201':
+     *      '200':
      *        description: 
      *              A JSON object with two fields-success(true or false) 
      *              and messages( post request successful or not )
