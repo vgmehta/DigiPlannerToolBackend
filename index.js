@@ -84,7 +84,8 @@ client.hmset("users", {
     'vedantmathe@gmail.com': '1',
     'sdbhalerao_b17@ce.vjti.ac.in': '0',
     'mathevedant@gmail.com': '0',
-    'kits41999@gmail.com': '0'
+    'kits41999@gmail.com': '0',
+    'prakharsingh007@gmail.com':'1'
   }, (err, reply) => {
     if (!reply) {
       console.log(err);
